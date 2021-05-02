@@ -15,22 +15,29 @@
   <body>
     <h1><strong>Calculadora cuota de crédito</strong></h1>
     <p>Calcula el valor de la cuota constante de tu préstamos, ingresando los siguientes datos</p>
-    <p>
-      Valor crédito
-      <input type="number" id="deuda" value="">
-    </p>
-    <p>
-      Tasa
-      <input type="number" id="tasa" value="">
-    </p>
-    <p>
-      Períodos
-      <input type="number" id="periodos" value="">
-    </p>
+    <form action="">
+      <label for="deuda">
+        <span>Valor deuda</span>
+        <input type="number" id="deuda" value=""> 
+      </label>
+    </form>
+    <form action="">
+      <label for="tasa">
+        <span>Tasa</span>
+        <input type="number" id="tasa" value="">
+      </label>
+    </form>
+    <form>
+      <label for="periodos">
+        <span>Períodos</span>
+        <input type="number" id="periodos" value="">
+      </label>
+    </form>
     <p>
       <input type="button" id="calcular" value="calcular">
     </p>
     <p id="resultado"></p>
     <script src='code.js'></script>
+   </form>
   </body>
 </html>
