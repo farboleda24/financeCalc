@@ -17,6 +17,6 @@ function calcularCuota()
   var plazo = parseFloat(texto_plazo.value);
   var numerador = tasa*(1+tasa)**plazo;
   var denominador = (1+tasa)**plazo-1;
-  var cuota = monto * numerador / denominador
-  resultado.innerHTML = "El valor de la cuota es " + cuota;
+  var cuota = monto * numerador / denominador;
+  resultado.innerHTML = "El valor de la cuota es " + Math.trunc(cuota);
 }
