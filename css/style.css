@@ -1,0 +1,70 @@
+.body {
+    background-color: rgb(87, 121, 121);
+}
+
+.main-title {
+    color:rgb(11, 11, 48);
+    font-size: 45px;
+    margin: 0;
+    padding: 0%;
+    font-weight: bold;
+    
+    
+}
+
+.paragraph {
+    font-size: 20px;
+    color: whitesmoke;
+}
+
+
+.input {
+    color: darkslategray;
+    position: absolute;
+    left: 150px;
+    
+}
+
+.main-item {
+    font-size: 20px;
+    color: whitesmoke;
+    padding-left: 20px;
+    
+}
+
+.button  {
+    block-size: 40px;
+    inline-size: 120px;
+    margin-left: 20px;
+    font-size: 20px;
+    background-color:rgb(11, 11, 48);
+    color: whitesmoke;
+}
+
+.button:hover {
+    block-size: 40px;
+    inline-size: 120px;
+    margin-left: 20px;
+    font-size: 20px;
+    background-color:darkslategray;
+    color: rgb(11, 11, 48);
+    font-weight: bold
+}
+
+.button:active {
+    block-size: 40px;
+    inline-size: 120px;
+    margin-left: 20px;
+    font-size: 20px;
+    background-color:white;
+    color: rgb(11, 11, 48); 
+    font-weight: bold;
+}
+
+.result {
+    color:rgb(11, 11, 48);
+    font-size: 20px;
+    margin: 0;
+    padding: 20px;
+    font-weight: bold ;
+}

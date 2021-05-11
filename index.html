@@ -6,31 +6,31 @@
     <title>Calculadora cuota de crétido</title>
     <link rel="stylesheet" href="./css/style.css">
   </head>
-  <body>
-    <h1><strong>Calculadora cuota de crédito</strong></h1>
-    <p>Calcula el valor de la cuota constante de tu préstamos, ingresando los siguientes datos</p>
+  <body class="body">
+    <header class="main-title">Calculadora cuota de crédito</header>
+    <p class="paragraph">Calcula el valor de la cuota constante de tu préstamos, ingresando los siguientes datos:</p>
     <form action="">
-      <label for="deuda">
+      <label for="deuda" class="main-item">
         <span>Valor deuda</span>
-        <input type="number" id="deuda" value="" required /> 
+        <input type="number" id="deuda" value="" required class="input"/> 
       </label>
     </form>
     <form action="">
-      <label for="tasa">
+      <label for="tasa" class="main-item">
         <span>Tasa</span>
-        <input type="number" id="tasa" value="" required />
+        <input type="number" id="tasa" value="" required class="input"/>
       </label>
     </form>
     <form>
-      <label for="periodos">
+      <label for="periodos" class="main-item">
         <span>Períodos</span>
-        <input type="number" id="periodos" value="" required />
+        <input type="number" id="periodos" value="" required class="input"/>
       </label>
-    </form>
+    </form >
     <p>
-      <input type="button" id="calcular" value="calcular">
+      <input type="button" id="calcular" value="calcular" class="button">
     </p>
-    <p id="resultado"></p>
+    <p id="resultado" class="result"></p>
     <script src='code.js'></script>
    </form>
   </body>
