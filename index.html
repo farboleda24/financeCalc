@@ -10,24 +10,42 @@
     <header class="main-title">Calculadora cuota de crédito</header>
     <main class="content">
       <p class="paragraph">Calcula el valor de la cuota constante de tu préstamos, ingresando los siguientes datos:</p>
-      <form action="" class="form">
-        <label for="deuda" class="main-item">
-          <span class="label-input">Valor deuda</span>
-          <input type="number" id="deuda" value="" required class="input"/> 
-        </label>
-      </form>
-      <form action="" class="form">
-        <label for="tasa" class="main-item">
-          <span class="label-input">Tasa</span>
-          <input type="number" id="tasa" value="" required class="input"/>
-        </label>
-      </form>
-      <form action="" class="form">
-        <label for="periodos" class="main-item">
-          <span class="label-input">Períodos</span>
-          <input type="number" id="periodos" value="" required class="input"/>
-        </label>
-      </form >
+      <div class="div-parent">
+        <div class="div-items">
+          <div class="div-label">
+            <p class="label-input">Valor deuda:</p>
+          </div>
+        </div>
+        <div class="div-items">
+          <div class="div-input">
+            <input type="number" id="deuda" value="" required class="input"/>
+          </div>
+        </div>
+      </div>
+      <div class="div-parent">
+        <div class="div-items">
+          <div class="div-label">
+            <p class="label-input">Tasa:</p>
+          </div>
+        </div> 
+        <div class="div-items">
+          <div class="div-input">
+            <input type="number" id="tasa" value="" required class="input"/>
+          </div>
+        </div>
+      </div>
+      <div class="div-parent">
+        <div class="div-items">
+          <div class="div-label">
+            <p  class="label-input">Períodos:</p>
+          </div>
+        </div>
+        <div class="div-items">
+          <div class="div-input">
+            <input type="number" id="periodos" value="" required class="input"/>
+          </div>
+        </div>
+      </div>
       <form action="" class="form">
         <input type="button" id="calcular" value="Calcular" class="button">
       </form>
@@ -35,5 +53,5 @@
       <script src='code.js'></script>
       </form>
     </main>
-    </body>
+  </body>
 </html>

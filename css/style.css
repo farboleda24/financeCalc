@@ -24,77 +24,88 @@ html {
     margin-right: auto;
     margin-top: 5%;
     background-color: rgb(209, 208, 208);
-    
 }
 
 .main-title {
     color:rgb(11, 11, 48);
-    font-size: 4.5rem;
+    font-size: 4.2rem;
     margin: 0rem;
     padding: 0.5rem;
     font-weight: bold;  
     text-align: center; 
     background-color: rgb(60, 121, 121);
-
 }
 
 .paragraph {
     margin: 1.4rem;
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     padding: 1rem;
     text-align: center;
+}
+
+.div-items {
+   display: inline-block;
+   width: 49%;     
+}
+
+.div-label {
+    display: inline-block;
+    width: 95%;
+    text-align: right;
+}
+
+.div-input {
+    display: inline-block;
+    width: 95%;
+}
+
+.label-input {
+    color: rgb(11, 11, 48);
+    font-size: 1.8rem;
+    margin: 0.2rem;
+    position: relative;
+}
+
+.input {
+    font-size: 1.6rem;
+    margin: 0.2rem;
+    color:rgb(11, 11, 48);
+    border-radius: 0.5rem;
+    position: relative;
+    width: 80%;  
 }
 
 .form {
     margin-top: 1.5rem;
     position: relative;
-    background-color: purple;
     text-align: center;
-}
-
-.main-item {
-    font-size: 2rem;
-    text-align: center;
-    background-color: red;
-
-}
-.label-input {
-    background-color: green;
-}
-
-.input {
-    psoi
-    font-size: 1.5rem;
-    color:rgb(11, 11, 48);
-    border-radius: 0.5rem;
-    left-: 10rem; 
 }
 
 .button  {
     block-size: 5rem;
     inline-size: 16rem;
     margin: 2rem;
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     background-color:rgb(11, 11, 48);
     color: whitesmoke;
     text-align: center;
 }
 
 .button:hover {
-    block-size: 4rem;
-    inline-size: 12rem;
+    block-size: 5rem;
+    inline-size: 16rem;
     margin: 2rem;
-    font-size: 2rem;
+    font-size: 2.2rem;
     background-color:darkslategray;
     color: rgb(11, 11, 48);
     font-weight: bold
 }
 
 .button:active {
-    block-size: 4rem;
-    inline-size: 12rem;
+    block-size: 5rem;
+    inline-size: 16rem;
     margin: 2rem;
-    font-size: 2rem;
+    font-size: 2.2rem;
     background-color:white;
     color: rgb(11, 11, 48); 
     font-weight: bold;
@@ -102,7 +113,7 @@ html {
 
 .result {
     color:rgb(11, 11, 48);
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: bold;
     text-align: center;
 }
