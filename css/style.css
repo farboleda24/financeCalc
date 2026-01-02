@@ -130,4 +130,33 @@ body.body {
   .content { padding: 3.2rem; }
   .main-title { font-size: 3.6rem; }
   .paragraph { font-size: 1.9rem; }
+}
+
+/* Mobile / small screens adjustments: improve alignment and spacing */
+@media (max-width: 599px) {
+  .main-title { font-size: 2.6rem; padding: 0.8rem 1rem; }
+  .paragraph { font-size: 1.45rem; padding: 0 0.8rem; }
+
+  .form-grid { gap: 1rem; padding: 0 0.6rem; }
+  .form-row { gap: 0.4rem; min-width: 0; align-items: stretch; }
+  .form-row label { font-size: 1.5rem; text-align: left; }
+
+  .input { font-size: 1.5rem; padding: 0.8rem 0.9rem; }
+  .muted { font-size: 1.3rem; }
+
+  .form-actions { padding: 0 0.6rem; }
+  .button { width: 100%; padding: 0.9rem 1rem; font-size: 1.6rem; }
+
+  .result { margin-top: 1.2rem; }
+  .result-box { padding: 1rem; }
+}
+
+/* Extra small: very narrow displays */
+@media (max-width: 420px) {
+  html { font-size: 56%; }
+  .main-title { font-size: 2.2rem; }
+  .input { font-size: 1.4rem; padding: 0.7rem; }
+  .form-row label { font-size: 1.4rem; }
+  .muted { font-size: 1.2rem; }
+  .button { font-size: 1.5rem; padding: 0.8rem; }
 } 
