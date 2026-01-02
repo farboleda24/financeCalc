@@ -8,6 +8,12 @@ Uso rápido:
 - Ingrese el número de periodos (entero).
 - Presione "Calcular". El resultado muestra la cuota por período, el total pagado y el interés total, con separadores de miles y 2 decimales.
 
+Funcionalidades adicionales:
+- Marque "Mostrar tabla de amortización" para ver el detalle por periodo (periodo, fecha, cuota, interés, abono a capital, saldo).
+- Use "Descargar CSV" para exportar la tabla como archivo `amortization.csv` (la columna `Fecha` está en formato `MM/YYYY`).
+- Ingrese la "Fecha de desembolso" usando mes (1-12) y año (opcional); si se deja vacío, la tabla mostrará los periodos pero **sin fecha**.
+
+
 Cambios principales realizados:
 - La tasa ahora se ingresa únicamente en porcentaje (ej. 1 = 1%).
 - Validación de entradas y mensajes de error.

@@ -29,13 +29,46 @@
             <input type="number" id="periodos" required class="input" placeholder="Ej. 36" step="1" min="1" aria-label="Cantidad de periodos" />
           </div>
 
+          <div class="form-row desembolso-row">
+            <label>Fecha de desembolso <span class="muted">(opcional)</span></label>
+            <div class="desembolso-inputs">
+              <input type="number" id="desembolso-mes" class="input month-input" placeholder="MM" min="1" max="12" aria-label="Mes de desembolso" />
+              <input type="number" id="desembolso-ano" class="input year-input" placeholder="AAAA" min="1900" max="9999" aria-label="Año de desembolso" />
+            </div>
+            <small class="muted">Ingrese mes (1-12) y año. Opcional: si se deja vacío, la tabla no mostrará fechas.</small>
+          </div>
+
           <div class="form-actions">
             <button type="button" id="calcular" class="button">Calcular</button>
           </div>
         </form>
       </section>
 
-      <p id="resultado" class="result" role="status" aria-live="polite"></p> 
+      <p id="resultado" class="result" role="status" aria-live="polite"></p>
+
+      <section class="amortization-area" aria-live="polite">
+        <div class="amort-controls">
+          <label class="checkbox-label"><input type="checkbox" id="show-schedule"> Mostrar tabla de amortización</label>
+          <button type="button" id="download-csv" class="button secondary" style="display:none">Descargar CSV</button>
+        </div>
+
+        <div id="amortization-container" class="amort-table-container" style="display:none;">
+          <table id="amortization-table" class="amort-table" aria-label="Tabla de amortización">
+            <thead>
+              <tr>
+                <th>Periodo</th>
+                <th>Fecha</th>
+                <th>Cuota</th>
+                <th>Interés</th>
+                <th>Abono a capital</th>
+                <th>Saldo</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
       <script src='code.js'></script>
     </main>
   </body>

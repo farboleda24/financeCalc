@@ -117,6 +117,17 @@ body.body {
 
 .error { color: #b00020; font-weight: 700; font-size: 1.8rem; }
 
+/* Amortization table styles */
+.amort-controls { display:flex; gap:1rem; align-items:center; justify-content:flex-end; margin-top:1rem; }
+.checkbox-label { font-size:1.5rem; color:var(--accent); display:flex; align-items:center; gap:0.6rem; }
+.button.secondary { background: transparent; color: var(--accent-2); border: 1px solid rgba(60,121,121,0.14); box-shadow: none; padding:0.6rem 1rem; border-radius:8px; }
+
+.amort-table-container { overflow-x: auto; margin-top:0.8rem; }
+.amort-table { width:100%; border-collapse: collapse; min-width: 560px; }
+.amort-table thead th { text-align:left; padding:0.8rem 1rem; font-size:1.4rem; color:var(--muted); border-bottom: 1px solid #eef3f3; }
+.amort-table tbody td { padding:0.8rem 1rem; font-size:1.6rem; color:var(--accent); border-bottom: 1px solid #f4f7f7; }
+.amort-table tbody tr:nth-child(even) { background: rgba(0,0,0,0.01); }
+
 /* Responsive: two-column layout on wider screens */
 @media (min-width: 720px) {
   .form-grid { grid-template-columns: repeat(2, 1fr); }
@@ -159,4 +170,14 @@ body.body {
   .form-row label { font-size: 1.4rem; }
   .muted { font-size: 1.2rem; }
   .button { font-size: 1.5rem; padding: 0.8rem; }
+}
+
+/* Desembolso inputs inline */
+.desembolso-inputs { display:flex; gap:0.6rem; align-items:center; }
+.month-input { width: 32%; }
+.year-input { width: 68%; }
+
+@media (max-width: 599px) {
+  .desembolso-inputs { flex-direction: row; }
+  .month-input, .year-input { width: 50%; }
 } 

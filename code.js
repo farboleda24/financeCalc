@@ -110,10 +110,111 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => formatDebtInput({ target: deudaEl }), 0);
   });
 
-  // Permitir Enter para calcular en los inputs
-  [tasaEl, periodosEl].forEach(el => {
+  // COMPONENTES DE LA TABLA DE AMORTIZACIÓN
+  const showScheduleEl = document.getElementById('show-schedule');
+  const downloadCsvBtn = document.getElementById('download-csv');
+  const amortContainer = document.getElementById('amortization-container');
+  const amortTableBody = document.querySelector('#amortization-table tbody');
+
+  function addMonths(date, months) {
+    const d = new Date(date);
+    const day = d.getDate();
+    d.setMonth(d.getMonth() + months);
+    // Manejar final de mes
+    if (d.getDate() !== day) {
+      d.setDate(0);
+    }
+    return d;
+  }
+
+  function computeAmortizationSchedule(P, r, n, cuota, startDate) {
+    const schedule = [];
+    let balance = P;
+
+    // Agregar periodo 0 con saldo inicial
+    schedule.push({ period: 0, date: startDate || null, payment: 0, interest: 0, principal: 0, balance: Number(P) });
+
+    for (let i = 1; i <= n; i++) {
+      const interest = r === 0 ? 0 : balance * r;
+      let principal = cuota - interest;
+      // En el último pago, ajustar por errores de redondeo para dejar saldo en 0
+      if (i === n) {
+        principal = balance;
+      }
+      const payment = interest + principal;
+      balance = Math.max(0, balance - principal);
+      const periodDate = startDate ? addMonths(startDate, i - 1) : null;
+      schedule.push({ period: i, date: periodDate, payment, interest, principal, balance });
+    }
+    return schedule;
+  }
+
+  function formatPeriodDate(date) {
+    if (!date) return '';
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const y = date.getFullYear();
+    return `${m}/${y}`; // formato MM/YYYY
+  }
+
+  function renderAmortizationTable(schedule) {
+    amortTableBody.innerHTML = '';
+    schedule.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${row.period}</td>
+        <td>${formatPeriodDate(row.date)}</td>
+        <td>${formatNumber(row.payment)}</td>
+        <td>${formatNumber(row.interest)}</td>
+        <td>${formatNumber(row.principal)}</td>
+        <td>${formatNumber(row.balance)}</td>
+      `;
+      amortTableBody.appendChild(tr);
+    });
+  }
+
+  function downloadCSV(schedule) {
+    const header = ['Periodo', 'Fecha', 'Cuota', 'Interes', 'Abono a capital', 'Saldo'];
+    const rows = schedule.map(r => [r.period, r.date ? `${String(r.date.getMonth()+1).padStart(2,'0')}/${r.date.getFullYear()}` : '', r.payment.toFixed(2), r.interest.toFixed(2), r.principal.toFixed(2), r.balance.toFixed(2)]);
+    const csv = [header, ...rows].map(r => r.join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'amortization.csv';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // Mostrar/ocultar tabla al marcar checkbox
+  showScheduleEl.addEventListener('change', () => {
+    if (showScheduleEl.checked && lastSchedule) {
+      amortContainer.style.display = 'block';
+      downloadCsvBtn.style.display = 'inline-block';
+      renderAmortizationTable(lastSchedule);
+      amortContainer.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      amortContainer.style.display = 'none';
+      downloadCsvBtn.style.display = 'none';
+    }
+  });
+
+  downloadCsvBtn.addEventListener('click', () => {
+    if (lastSchedule) downloadCSV(lastSchedule);
+  });
+
+  // Guardamos última tabla generada para render/descarga bajo demanda
+  let lastSchedule = null;
+
+  // Permitir Enter para calcular en los inputs (incluye fecha de desembolso)
+  const desembolsoMesEl = document.getElementById('desembolso-mes');
+  const desembolsoAnoEl = document.getElementById('desembolso-ano');
+
+  [deudaEl, tasaEl, periodosEl, desembolsoMesEl, desembolsoAnoEl].forEach(el => {
+    if (!el) return;
     el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleCalculate();
+      if (e.key === 'Enter') handleCalculateWithSchedule();
     });
   });
 
@@ -127,4 +228,54 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  // Actualizar lastSchedule cuando se calcula
+  const originalHandle = handleCalculate;
+  function handleCalculateWithSchedule() {
+    originalHandle();
+    // Si ocurrió error, resultado muestra .error; no sobrescribimos schedule
+    const errorEl = resultadoEl.querySelector('.error');
+    if (errorEl) return;
+
+    // RE-CALC: volver a calcular valores limpios para generar la tabla
+    const P = parseFloat(sanitizeNumberInput(deudaEl.value));
+    const tasaInput = parseFloat(sanitizeNumberInput(tasaEl.value));
+    const n = parseInt(sanitizeNumberInput(periodosEl.value), 10);
+    const r = tasaInput / 100;
+    const cuota = calculateAnnuity(P, r, n);
+
+    // Obtener fecha de desembolso (mes y año) — opcional
+    const monthRaw = (document.getElementById('desembolso-mes').value || '').trim();
+    const yearRaw = (document.getElementById('desembolso-ano').value || '').trim();
+    let startDate = null;
+
+    if (monthRaw === '' && yearRaw === '') {
+      // opcional: no se especificó fecha
+      startDate = null;
+    } else {
+      const month = parseInt(sanitizeNumberInput(monthRaw), 10);
+      const year = parseInt(sanitizeNumberInput(yearRaw), 10);
+      if (!Number.isInteger(month) || month < 1 || month > 12 || !Number.isInteger(year) || year < 1900) {
+        showError('Ingrese una fecha de desembolso válida (mes 1-12 y año >= 1900), o deje ambos campos vacíos.');
+        return;
+      }
+      startDate = new Date(year, month - 1, 1);
+    }
+
+    const schedule = computeAmortizationSchedule(P, r, n, cuota, startDate);
+    lastSchedule = schedule;
+
+    downloadCsvBtn.style.display = 'inline-block';
+    if (showScheduleEl.checked) {
+      amortContainer.style.display = 'block';
+      renderAmortizationTable(schedule);
+      amortContainer.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      amortContainer.style.display = 'none';
+    }
+  }
+
+  // Rebind calculate button to new handler that also prepares the table
+  calcularBtn.removeEventListener('click', handleCalculate);
+  calcularBtn.addEventListener('click', handleCalculateWithSchedule);
 });
