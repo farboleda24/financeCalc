@@ -3,55 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora cuota de crétido</title>
+    <title>Calculadora de cuota de crédito</title>
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body class="body">
-    <header class="main-title">Calculadora cuota de crédito</header>
+    <header class="main-title">Calculadora de cuota de crédito</header>
     <main class="content">
-      <p class="paragraph">Calcula el valor de la cuota constante de tu préstamos, ingresando los siguientes datos:</p>
-      <div class="div-parent">
-        <div class="div-items">
-          <div class="div-label">
-            <p class="label-input">Valor deuda:</p>
+      <p class="paragraph">Calcula el valor de la cuota constante de tu préstamo; ingresa los datos a continuación y obtén la cuota por período, total pagado e interés total.</p>
+
+      <section class="calc-panel">
+        <form class="form-grid" action="" onsubmit="return false;">
+          <div class="form-row">
+            <label for="deuda">Valor deuda</label>
+            <input type="text" id="deuda" required class="input" placeholder="Ej. 1,000,000" inputmode="numeric" pattern="[0-9.,]*" aria-label="Valor deuda" />
           </div>
-        </div>
-        <div class="div-items">
-          <div class="div-input">
-            <input type="number" id="deuda" value="" required class="input"/>
+
+          <div class="form-row">
+            <label for="tasa">Tasa (% por período)</label>
+            <input type="number" id="tasa" required class="input" placeholder="Ej. 12 para 12%" step="0.01" min="0" aria-label="Tasa por periodo" />
+            <small class="muted">Ingrese la tasa en porcentaje (ej. 1.1 = 1.1%).</small>
           </div>
-        </div>
-      </div>
-      <div class="div-parent">
-        <div class="div-items">
-          <div class="div-label">
-            <p class="label-input">Tasa:</p>
+
+          <div class="form-row">
+            <label for="periodos">Períodos</label>
+            <input type="number" id="periodos" required class="input" placeholder="Ej. 36" step="1" min="1" aria-label="Cantidad de periodos" />
           </div>
-        </div> 
-        <div class="div-items">
-          <div class="div-input">
-            <input type="number" id="tasa" value="" required class="input"/>
+
+          <div class="form-actions">
+            <button type="button" id="calcular" class="button">Calcular</button>
           </div>
-        </div>
-      </div>
-      <div class="div-parent">
-        <div class="div-items">
-          <div class="div-label">
-            <p  class="label-input">Períodos:</p>
-          </div>
-        </div>
-        <div class="div-items">
-          <div class="div-input">
-            <input type="number" id="periodos" value="" required class="input"/>
-          </div>
-        </div>
-      </div>
-      <form action="" class="form">
-        <input type="button" id="calcular" value="Calcular" class="button">
-      </form>
-      <p id="resultado" class="result"></p>
+        </form>
+      </section>
+
+      <p id="resultado" class="result" role="status" aria-live="polite"></p> 
       <script src='code.js'></script>
-      </form>
     </main>
   </body>
 </html>
